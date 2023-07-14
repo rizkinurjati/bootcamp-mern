@@ -24,7 +24,7 @@ const getOneCategories = async (req) => {
     return result;
 };
 
-const updateCatgeories = async (req) => {
+const updateCategories = async (req) => {
     const { id } = req.params;
     const { name } = req.body;
 
@@ -58,10 +58,17 @@ const deleteCategories = async (req) => {
 
 };
 
+const checkingCategories = async (id) => {
+    const result = await Categories.findOne({ _id : id });
+
+    if(!result) throw new NotFoundError(`Tidak ada category dengan id : ${id}`);
+    return result;
+} 
 module.exports = { 
     getAllCategories,
     createCategories,
     getOneCategories,
-    updateCatgeories,
+    updateCategories,
     deleteCategories,
+    checkingCategories,
 };
